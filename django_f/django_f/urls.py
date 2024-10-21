@@ -16,7 +16,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from cursos.views import cursos,cursosAPI,mostrarFormulario
+from django.http import HttpResponse
+
+def funcion(request):
+    print(request.headers)
+    return HttpResponse('<h1>Hola mundo django</h1>')
+
+
+def saludo(request):
+    nombre=request.GET['nombre']
+    return HttpResponse(f'<h1>Hola {nombre} django</h1>')
+
+
+def suma(request,n1,n2):
+    suma=n1+n2
+    return HttpResponse(f'<h1>El resultado es {suma}</h1>')
+
 
 urlpatterns = [
+    path('funcion/',funcion),
+    path('cursos/api/',cursosAPI),
+    path('saludo/',saludo),
+    path('suma/<int:n1>/<int:n2>/',suma),
+    path('cursos/',cursos),
+    path('form/',mostrarFormulario),
     path('admin/', admin.site.urls),
 ]
